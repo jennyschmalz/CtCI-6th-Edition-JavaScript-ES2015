@@ -11,13 +11,30 @@
  * @return {boolean}      True if unique characters, otherwise false
  */
 export function hasUniqueCharactersSet(str) {
-  let chars = new Set();
 
-  for (let i = 0; i < str.length; ++i) {
-    if (chars.has(str[i])) {
+  // answer from repo
+  // let chars = new Set();
+
+  // for (let i = 0; i < str.length; ++i) {
+  //   if (chars.has(str[i])) {
+  //     return false;
+  //   }
+  //   chars.add(str[i]);
+  // }
+  // return true;
+
+
+  // my answer
+  // using a Set data structure
+  // Time complexity: O(n)
+  // Space complexity: O(n)
+  const charObj = new Set();
+  for (let i = 0; i < str.length; i += 1) {
+    if (charObj.has(str[i])){
       return false;
+    } else if (str[i] !== ' ') {
+      charObj.add(str[i]);
     }
-    chars.add(str[i]);
   }
   return true;
 }
@@ -34,11 +51,25 @@ export function hasUniqueCharactersSet(str) {
  * @return {boolean}      True if unique characters, otherwise false
  */
 export function hasUniqueCharactersSort(str) {
+  // answer from repo
   // sort string using quicksort
-  str.sort();
+  // str.sort();
 
-  for (var i = 1; i < str.length; ++i) {
-    if (str[i] === str[i - 1]) {
+  // for (var i = 1; i < str.length; ++i) {
+  //   if (str[i] === str[i - 1]) {
+  //     return false;
+  //   }
+  // }
+  // return true;
+
+  // my answer w/o using any data structures
+  // Time complexity: O(n log n)
+  // Space complexity: O(n)
+  const newStr = str.sort();
+  for (let i = 0; i < newStr.length; i += 1) {
+    if (newStr[i].toLowerCase() === ' ') {
+      continue;
+    } else if (newStr[i] === newStr[i + 1]){
       return false;
     }
   }
