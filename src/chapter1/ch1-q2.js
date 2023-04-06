@@ -14,29 +14,53 @@
  * @return {boolean}       True if first and second strings are permutations otherwise false
  */
 export function isPermutationMap(str1, str2) {
-  if (str1.length === 0 || str1.length !== str2.length) {
-    return false;
+
+  // repo answer
+  // if (str1.length === 0 || str1.length !== str2.length) {
+  //   return false;
+  // }
+
+  // let chars = new Map();
+
+  // for (let i = 0; i < str1.length; ++i) {
+  //   chars.set(str1[i], chars.get(str1[i]) + 1 || 1); // increment or set to 1
+  // }
+
+  // for (let i = 0; i < str2.length; ++i) {
+  //   let count = chars.get(str2[i]);
+  //   if (!count) {
+  //     return false;
+  //   }
+  //   if (count === 1) {
+  //     chars.delete(str2[i]);
+  //   }
+  //   else {
+  //     chars.set(str2[i], count - 1);
+  //   }
+  // }
+
+  // return chars.size === 0;
+
+  // using Map data structure
+  // Time complexity: O(n + m)
+  // Space complexity: O(n)
+  if (str1.length !== str2.length || !str1.length || !str2.length) return false;
+  
+  const chars = new Map();
+
+  for (let i = 0; i < str1.length; i += 1) {
+    chars.set(str1[i], chars.get(str1[i]) + 1 || 1);
   }
 
-  let chars = new Map();
-
-  for (let i = 0; i < str1.length; ++i) {
-    chars.set(str1[i], chars.get(str1[i]) + 1 || 1); // increment or set to 1
-  }
-
-  for (let i = 0; i < str2.length; ++i) {
-    let count = chars.get(str2[i]);
-    if (!count) {
-      return false;
-    }
+  for (let i = 0 ; i < str2.length; i += 1) {
+    const count = chars.get(str2[i]);
+    if (!count) return false;
     if (count === 1) {
       chars.delete(str2[i]);
-    }
-    else {
+    } else {
       chars.set(str2[i], count - 1);
     }
   }
-
   return chars.size === 0;
 }
 
@@ -53,12 +77,26 @@ export function isPermutationMap(str1, str2) {
  * @return {boolean}       True if first and second strings are permutations otherwise false
  */
 export function isPermutationSorted(str1, str2) {
-  if (str1.length === 0 || str1.length !== str2.length) {
+  // repo answer
+  // if (str1.length === 0 || str1.length !== str2.length) {
+  //   return false;
+  // }
+  // // sort string using quicksort
+  // str1.sort();
+  // str2.sort();
+
+  // return str1.every((v, i) => v === str2[i]);
+
+  // Time complexity: O(n log n + m log m)
+  // Space complexity: O(n + m)
+  if (str1.length !== str2.length || !str1.length || !str2.length) {
     return false;
   }
-  // sort string using quicksort
-  str1.sort();
-  str2.sort();
 
-  return str1.every((v, i) => v === str2[i]);
+  const str1Sorted = str1.sort();
+  const str2Sorted = str2.sort();
+
+  return str1Sorted.every((letter, i) => letter === str2Sorted[i]);
+
+  // 
 }
